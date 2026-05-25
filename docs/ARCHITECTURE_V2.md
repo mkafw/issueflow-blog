@@ -86,7 +86,7 @@ node scripts/generate-pages.js --input ./content/generated --output ./app
 
 | 层级 | 技术 | 版本 | 说明 |
 |------|------|------|------|
-| **框架** | Next.js | 15.x | App Router，静态生成 |
+| **框架** | Next.js | 16.x | App Router，静态生成 |
 | **语言** | TypeScript | 5.x | 类型安全 |
 | **UI 组件** | React | 19.x | 函数组件，Hooks |
 | **样式** | Tailwind CSS | 4.x | 原子化 CSS |
