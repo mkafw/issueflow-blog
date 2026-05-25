@@ -70,3 +70,93 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         timeout-minutes: 10
+
+      - name: Notify Feishu (Success)
+        if: success()
+        run: |
+          curl -X POST "${{ secrets.FEISHU_WEBHOOK_URL }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "msg_type": "interactive",
+              "card": {
+                "header": {
+                  "title": {
+                    "tag": "plain_text",
+                    "content": "✅ Issueflow-Blog 部署成功"
+                  },
+                  "template": "green"
+                },
+                "elements": [
+                  {
+                    "tag": "div",
+                    "text": {
+                      "tag": "lark_md",
+                      "content": "**仓库**: mkafw/issueflow-blog\n**提交**: ${{ github.sha }}\n**作者**: ${{ github.actor }}\n**时间**: ${{ github.event.head_commit.timestamp }}"
+                    }
+                  },
+                  {
+                    "tag": "action",
+                    "actions": [
+                      {
+                        "tag": "button",
+                        "text": {
+                          "tag": "plain_text",
+                          "content": "查看网站"
+                        },
+                        "url": "https://issueflow-blog.netlify.app",
+                        "type": "primary"
+                      },
+                      {
+                        "tag": "button",
+                        "text": {
+                          "tag": "plain_text",
+                          "content": "查看提交"
+                        },
+                        "url": "https://github.com/mkafw/issueflow-blog/commit/${{ github.sha }}"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }"
+
+      - name: Notify Feishu (Failure)
+        if: failure()
+        run: |
+          curl -X POST "${{ secrets.FEISHU_WEBHOOK_URL }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "msg_type": "interactive",
+              "card": {
+                "header": {
+                  "title": {
+                    "tag": "plain_text",
+                    "content": "❌ Issueflow-Blog 部署失败"
+                  },
+                  "template": "red"
+                },
+                "elements": [
+                  {
+                    "tag": "div",
+                    "text": {
+                      "tag": "lark_md",
+                      "content": "**仓库**: mkafw/issueflow-blog\n**提交**: ${{ github.sha }}\n**作者**: ${{ github.actor }}\n\n请检查 GitHub Actions 日志。"
+                    }
+                  },
+                  {
+                    "tag": "action",
+                    "actions": [
+                      {
+                        "tag": "button",
+                        "text": {
+                          "tag": "plain_text",
+                          "content": "查看日志"
+                        },
+                        "url": "https://github.com/mkafw/issueflow-blog/actions",
+                        "type": "danger"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }"
