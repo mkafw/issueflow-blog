@@ -1,0 +1,31 @@
+{
+  "project": "issueflow-blog",
+  "version": "1.0.0",
+  "maxCallsPerHour": 100,
+  "timeout": 15,
+  "outputFormat": "json",
+  "allowedTools": [
+    "Read",
+    "Write",
+    "Edit",
+    "Bash(git add *)",
+    "Bash(git commit *)",
+    "Bash(git diff *)",
+    "Bash(git log *)",
+    "Bash(git status)",
+    "Bash(git status *)",
+    "Bash(git push *)",
+    "Bash(git pull *)",
+    "Bash(git fetch *)",
+    "Bash(git checkout *)",
+    "Bash(git branch *)",
+    "Bash(git stash *)",
+    "Bash(git merge *)",
+    "Bash(git tag *)",
+    "Bash(npm *)",
+    "Bash(pytest)"
+  ],
+  "sessionExpiry": 24,
+  "notify": false,
+  "backup": false
+}

@@ -1,0 +1,31 @@
+{
+  "name": "issueflow-blog",
+  "version": "1.0.0",
+  "description": "基于 GitHub Issues + Vim + Fumadocs 的自动化博客系统",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "write": "bash scripts/write.sh",
+    "init": "bash scripts/init-fumadocs.sh"
+  },
+  "dependencies": {
+    "fumadocs-core": "^15.0.0",
+    "fumadocs-mdx": "^11.0.0",
+    "fumadocs-ui": "^15.0.0",
+    "lucide-react": "^0.480.0",
+    "next": "^15.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.0",
+    "@types/node": "^22.14.0",
+    "@types/react": "19.2.15",
+    "eslint": "^9.24.0",
+    "eslint-config-next": "^15.3.0",
+    "postcss": "^8.5.0",
+    "tailwindcss": "^4.1.0",
+    "typescript": "^5.8.0"
+  }
+}

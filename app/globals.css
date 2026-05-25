@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@import "fumadocs-ui/css/preset";
+
+:root {
+  --font-inter: 'Inter', sans-serif;
+}
+
+body {
+  font-family: var(--font-inter);
+}
