@@ -1,0 +1,70 @@
+name: Issues to Pages
+
+on:
+  issues:
+    types: [opened, edited, closed, labeled, unlabeled]
+  
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: 'Issue 编号（留空则处理所有开放 Issue）'
+        required: false
+      force_sync:
+        description: '强制同步所有 Issue'
+        required: false
+        default: 'false'
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: |
+          npm install -g @octokit/rest
+
+      - name: Parse Issues
+        id: parse
+        run: |
+          node scripts/sync-issues.js \
+            --repo "${{ github.repository }}" \
+            --output "./content/generated" \
+            --token "${GITHUB_TOKEN}" \
+            ${{ github.event.inputs.issue_number && format('--issue {0}', github.event.inputs.issue_number) || '' }} \
+            ${{ github.event.inputs.force_sync == 'true' && '--force' || '' }}
+
+      - name: Generate Pages
+        run: |
+          node scripts/generate-pages.js \
+            --input "./content/generated" \
+            --output "./app"
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          if git diff --staged --quiet && git diff --quiet; then
+            echo "No changes to commit"
+          else
+            git add -A
+            git commit -m "chore: sync issues to pages [skip ci]"
+            git push
+          fi
+
+      - name: Notify on error
+        if: failure()
+        run: |
+          echo "::error::Issues to Pages sync failed"
