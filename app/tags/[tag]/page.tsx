@@ -28,12 +28,14 @@ export default async function TagPage({ params }: Props) {
   if (posts.length === 0) notFound();
 
   return (
-    <main className="max-w-4xl mx-auto px-6 py-16">
+    <main className="max-w-3xl mx-auto px-6 py-12 md:py-20">
       <BackToTop />
-      <h1 className="text-4xl font-bold text-gold-gradient mb-2">#{tag}</h1>
-      <p className="text-cosmic-text-secondary mb-10">{posts.length} 篇文章</p>
+      <section className="apple-glass p-8 md:p-12 mb-10 text-center">
+        <h1 className="text-3xl md:text-4xl font-bold text-gold-gradient mb-3">#{tag}</h1>
+        <p className="text-cosmic-text-secondary">{posts.length} 篇文章</p>
+      </section>
       {posts.length > 0 ? <PostCardList posts={posts} /> : <EmptyState title="暂无文章" />}
-      <div className="mt-10">
+      <div className="mt-10 text-center">
         <a href="/tags" className="text-sm text-cosmic-gold hover:text-cosmic-gold-light transition-colors">
           ← 所有标签
         </a>

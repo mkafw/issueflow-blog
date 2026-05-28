@@ -180,8 +180,10 @@
 .metric-value {
   font-size: 28px;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--accent-gold);
   font-family: 'JetBrains Mono', monospace;
+  display: block;
+  margin: 6px 0 4px;
 }
 
 .metric-status {
@@ -313,9 +315,9 @@
 
 .dark {
   /* --- 颜色体系 --- */
-  --color-fd-background: #000000;
+  --color-fd-background: transparent;
   --color-fd-foreground: #f0f0f5;
-  --color-fd-muted: rgba(20, 20, 30, 0.6);
+  --color-fd-muted: rgba(20, 20, 30, 0.5);
   --color-fd-muted-foreground: #a0a0b8;
   --color-fd-border: rgba(255, 255, 255, 0.08);
   --color-fd-card: rgba(20, 20, 30, 0.4);

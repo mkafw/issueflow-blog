@@ -8,10 +8,12 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="max-w-2xl mx-auto px-6 py-16">
-      <h1 className="text-4xl font-bold text-gold-gradient mb-4">联系</h1>
-      <p className="text-cosmic-text-secondary mb-10">有任何问题或建议？欢迎留言</p>
-      <div className="apple-glass p-8">
+    <main className="max-w-xl mx-auto px-6 py-12 md:py-20">
+      <section className="apple-glass p-8 md:p-12 mb-10 text-center">
+        <h1 className="text-3xl md:text-4xl font-bold text-gold-gradient mb-3">联系</h1>
+        <p className="text-cosmic-text-secondary">有任何问题或建议？欢迎留言</p>
+      </section>
+      <div className="apple-glass p-8 md:p-10">
         <ContactForm />
       </div>
     </main>

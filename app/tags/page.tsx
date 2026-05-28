@@ -11,17 +11,19 @@ export default function TagsPage() {
   const tags = getAllTags();
 
   return (
-    <main className="max-w-4xl mx-auto px-6 py-16">
+    <main className="max-w-3xl mx-auto px-6 py-12 md:py-20">
       <BackToTop />
-      <h1 className="text-4xl font-bold text-gold-gradient mb-4">标签</h1>
-      <p className="text-cosmic-text-secondary mb-10">共 {tags.length} 个标签</p>
+      <section className="apple-glass p-8 md:p-12 mb-10 text-center">
+        <h1 className="text-3xl md:text-4xl font-bold text-gold-gradient mb-3">标签</h1>
+        <p className="text-cosmic-text-secondary">共 {tags.length} 个标签</p>
+      </section>
 
       {tags.length === 0 ? (
         <div className="apple-glass p-12 text-center">
-          <p className="text-cosmic-text-secondary">暂无标签，同步文章后显示</p>
+          <p className="text-cosmic-text-secondary">暂无标签</p>
         </div>
       ) : (
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap justify-center gap-3">
           {tags.map((tag) => (
             <a
               key={tag.name}
