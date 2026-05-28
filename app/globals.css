@@ -307,59 +307,39 @@
 }
 
 /* ============================================
-   Fumadocs UI 覆盖 — Apple Glass 风格
+   Fumadocs UI 主题覆盖 — Apple Glass 风格
    ============================================ */
+/* Fumadocs UI 用 CSS 变量做主题定制，不是 .fd-* 类名 */
 
-/* 侧边栏 */
-.fd-sidebar {
-  background: rgba(20, 20, 30, 0.6) !important;
-  backdrop-filter: blur(30px) !important;
-  -webkit-backdrop-filter: blur(30px) !important;
-  border-right: 1px solid rgba(255, 255, 255, 0.06) !important;
-}
+.dark {
+  /* --- 颜色体系 --- */
+  --color-fd-background: #000000;
+  --color-fd-foreground: #f0f0f5;
+  --color-fd-muted: rgba(20, 20, 30, 0.6);
+  --color-fd-muted-foreground: #a0a0b8;
+  --color-fd-border: rgba(255, 255, 255, 0.08);
+  --color-fd-card: rgba(20, 20, 30, 0.4);
+  --color-fd-card-foreground: #f0f0f5;
+  --color-fd-popover: rgba(20, 20, 30, 0.8);
+  --color-fd-popover-foreground: #f0f0f5;
+  --color-fd-primary: #d4a853;
+  --color-fd-primary-foreground: #000000;
+  --color-fd-secondary: rgba(25, 25, 38, 0.5);
+  --color-fd-secondary-foreground: #f0f0f5;
+  --color-fd-accent: rgba(46, 92, 255, 0.15);
+  --color-fd-accent-foreground: #f0d060;
+  --color-fd-ring: rgba(212, 168, 83, 0.3);
+  --color-fd-info: #2e5cff;
+  --color-fd-warning: #f0d060;
+  --color-fd-error: #ff4444;
+  --color-fd-success: #22c55e;
 
-/* 导航栏 */
-.fd-nav {
-  background: rgba(0, 0, 0, 0.7) !important;
-  backdrop-filter: blur(30px) !important;
-  -webkit-backdrop-filter: blur(30px) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
-}
-
-/* 搜索框 */
-.fd-search-bar {
-  background: rgba(20, 20, 30, 0.4) !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  border-radius: 10px !important;
-  backdrop-filter: blur(10px) !important;
-}
-
-/* 代码块 */
-.fd-code-block {
-  background: rgba(10, 10, 15, 0.8) !important;
-  border: 1px solid rgba(255, 255, 255, 0.06) !important;
-  border-radius: 12px !important;
-}
-
-/* 链接 — 金色 */
-.fd-content a {
-  color: var(--accent-gold) !important;
-  transition: color 0.3s ease;
-}
-
-.fd-content a:hover {
-  color: var(--accent-gold-light) !important;
-  text-shadow: 0 0 12px var(--glow-gold);
-}
-
-/* 标题 */
-.fd-content h1,
-.fd-content h2,
-.fd-content h3 {
-  color: var(--text-primary);
-}
-
-/* 页面主体 */
-.fd-page {
-  background: transparent !important;
+  /* --- 布局 --- */
+  --fd-sidebar-width: 18rem;
+  --fd-page-width: 1200px;
+  --fd-nav-height: 4rem;
+  --fd-banner-height: 0px;
+  --fd-tocnav-height: 0px;
+  --fd-toc-width: 0px;
+  --fd-layout-width: 100vw;
 }
