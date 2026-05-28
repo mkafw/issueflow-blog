@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     description: '基于 GitHub Issues 的自动化博客系统',
   },
   icons: {
-    icon: '/favicon.ico',
+    icon: '/favicon.svg',
   },
 };
 
@@ -45,9 +45,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="zh-CN" className="dark">
+    <html lang="zh-CN" className="dark" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.classList.add('dark')`,
+          }}
+        />
+      </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased bg-cosmic text-cosmic-text`}>
-        <RootProvider>
+        <RootProvider theme={{ defaultTheme: 'dark' }}>
           {/* 宇宙光晕氛围 */}
           <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
             <div className="glow-orb glow-orb-blue" />

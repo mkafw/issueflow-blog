@@ -335,11 +335,11 @@
   --color-fd-success: #22c55e;
 
   /* --- 布局 --- */
-  --fd-sidebar-width: 18rem;
-  --fd-page-width: 1200px;
-  --fd-nav-height: 4rem;
+  --fd-sidebar-width: 16rem;
+  --fd-page-width: 860px;
+  --fd-nav-height: 3.5rem;
   --fd-banner-height: 0px;
   --fd-tocnav-height: 0px;
-  --fd-toc-width: 0px;
+  --fd-toc-width: 220px;
   --fd-layout-width: 100vw;
 }

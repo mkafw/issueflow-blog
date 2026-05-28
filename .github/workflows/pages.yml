@@ -52,6 +52,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
+          # Requires `output: 'export'` in next.config.ts to produce ./out
+          # Fumadocs UI CSS variables need SSR — prefer Netlify deploy instead
           path: './out'
 
   deploy:

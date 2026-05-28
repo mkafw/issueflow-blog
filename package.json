@@ -19,6 +19,7 @@
     "next": "^15.5.18"
   },
   "devDependencies": {
+    "@netlify/plugin-nextjs": "^5.15.11",
     "@tailwindcss/postcss": "^4.1.0",
     "@types/node": "^22.14.0",
     "@types/react": "19.2.15",

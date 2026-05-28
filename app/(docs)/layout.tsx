@@ -1,29 +1,39 @@
 import { DocsLayout } from 'fumadocs-ui/layouts/docs';
 import type { ReactNode } from 'react';
 import { docsSource } from './source';
+import { LayoutWrapper } from './layout-wrapper';
 
-export default async function Layout({ children }: { children: ReactNode }) {
+const tree = docsSource.getPageTree();
+
+export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <DocsLayout
-      tree={docsSource.getPageTree()}
-      nav={{
-        title: 'Issueflow Blog',
-        url: '/docs',
-      }}
-      links={[
-        {
-          text: '文档',
-          url: '/docs',
-          active: 'nested-url',
-        },
-        {
-          text: 'GitHub',
-          url: 'https://github.com/mkafw/issueflow-blog',
-          external: true,
-        },
-      ]}
+    <LayoutWrapper
+      tree={tree}
+      docsLayout={
+        <DocsLayout
+          tree={tree}
+          nav={{ title: 'Issueflow Blog', url: '/' }}
+          githubUrl="https://github.com/mkafw/issueflow-blog"
+          sidebar={{
+            collapsible: true,
+            defaultOpenLevel: 1,
+            footer: (
+              <div className="px-3 py-2 text-xs text-[var(--text-muted)]">
+                Issueflow Blog &copy; 2026
+              </div>
+            ),
+          }}
+          themeSwitch={{ enabled: true, mode: 'light-dark' }}
+          links={[
+            { text: '首页', url: '/', active: 'url' },
+            { text: 'GitHub', url: 'https://github.com/mkafw/issueflow-blog', external: true },
+          ]}
+        >
+          {children}
+        </DocsLayout>
+      }
     >
       {children}
-    </DocsLayout>
+    </LayoutWrapper>
   );
 }
