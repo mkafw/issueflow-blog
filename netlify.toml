@@ -1,9 +1,10 @@
 [build]
-  publish = "out"
   command = "npm run build"
+  functions = "netlify/functions"
 
 [build.environment]
   NODE_VERSION = "22"
+  NEXT_TELEMETRY_DISABLED = "1"
 
 [[headers]]
   for = "/*"
@@ -12,7 +13,5 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# Netlify Next.js Runtime 自动处理 SSR/ISR
+# 不需要手动配置 redirects，Next.js App Router 会自动处理

@@ -1,10 +1,365 @@
 @import "tailwindcss";
 @import "fumadocs-ui/css/preset";
 
-:root {
-  --font-inter: 'Inter', sans-serif;
+/* ============================================
+   Apple Glass 暗系设计 — 雍容华贵
+   Inspired by qa-os-system.pages.dev
+   ============================================ */
+
+/* ---------- Tailwind v4 主题令牌 ---------- */
+@theme {
+  --color-cosmic-bg: #000000;
+  --color-cosmic-surface: rgba(20, 20, 30, 0.4);
+  --color-cosmic-border: rgba(255, 255, 255, 0.08);
+  --color-cosmic-border-hover: rgba(255, 255, 255, 0.15);
+  --color-cosmic-text: #f0f0f5;
+  --color-cosmic-text-secondary: #a0a0b8;
+  --color-cosmic-text-muted: #606080;
+  --color-cosmic-gold: #d4a853;
+  --color-cosmic-gold-light: #f0d060;
+  --color-cosmic-blue: #2e5cff;
+  --color-cosmic-purple: #7b2eff;
 }
 
-body {
-  font-family: var(--font-inter);
+/* ---------- CSS 变量 ---------- */
+:root {
+  --glass-bg: rgba(20, 20, 30, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-hover: rgba(255, 255, 255, 0.15);
+  --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  --glass-radius: 14px;
+
+  --text-primary: #f0f0f5;
+  --text-secondary: #a0a0b8;
+  --text-muted: #606080;
+
+  --accent-gold: #d4a853;
+  --accent-gold-light: #f0d060;
+  --accent-blue: #2e5cff;
+  --accent-purple: #7b2eff;
+
+  --glow-gold: rgba(212, 168, 83, 0.15);
+  --glow-blue: rgba(46, 92, 255, 0.15);
+  --glow-purple: rgba(123, 46, 255, 0.15);
+}
+
+/* ---------- 宇宙深空背景 ---------- */
+.bg-cosmic {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, #1a1a40 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 0% 50%, rgba(46, 92, 255, 0.08) 0%, transparent 40%),
+    radial-gradient(ellipse 40% 40% at 100% 50%, rgba(123, 46, 255, 0.08) 0%, transparent 40%);
+  background-color: #000000;
+}
+
+/* ---------- Apple 玻璃卡片 ---------- */
+.apple-glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--glass-radius);
+  box-shadow:
+    0 4px 30px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.apple-glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, transparent 100%);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.apple-glass:hover {
+  background: rgba(25, 25, 38, 0.5);
+  border-color: var(--glass-border-hover);
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.4),
+    0 0 20px var(--glow-gold),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+/* ---------- 光晕氛围球 ---------- */
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  opacity: 0.35;
+  animation: orb-float 30s ease-in-out infinite;
+}
+
+.glow-orb-blue {
+  width: 500px;
+  height: 500px;
+  background: rgba(46, 92, 255, 0.12);
+  top: -200px;
+  left: -150px;
+}
+
+.glow-orb-purple {
+  width: 600px;
+  height: 600px;
+  background: rgba(123, 46, 255, 0.08);
+  bottom: -250px;
+  right: -200px;
+  animation-delay: -15s;
+}
+
+@keyframes orb-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(40px, -30px) scale(1.05); }
+  50% { transform: translate(-20px, 40px) scale(0.95); }
+  75% { transform: translate(30px, 20px) scale(1.02); }
+}
+
+/* ---------- 金色标题 ---------- */
+.text-gold {
+  color: var(--accent-gold);
+}
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, var(--accent-gold-light) 0%, var(--accent-gold) 50%, #b8862d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gold-glow {
+  text-shadow: 0 0 20px var(--glow-gold), 0 0 40px var(--glow-gold);
+}
+
+/* ---------- 指标卡片 ---------- */
+.metric-glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.metric-glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.metric-glass:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.metric-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+}
+
+.metric-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.metric-status {
+  font-size: 12px;
+  color: var(--accent-gold);
+}
+
+/* ---------- 文章卡片 ---------- */
+.post-glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--glass-radius);
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.post-glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.post-glass::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--accent-gold-light), var(--accent-gold));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.post-glass:hover::after {
+  opacity: 1;
+}
+
+.post-glass:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.4),
+    0 0 20px var(--glow-gold),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.post-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  transition: color 0.3s ease;
+}
+
+.post-glass:hover .post-title {
+  color: var(--accent-gold-light);
+}
+
+.post-excerpt {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.post-date {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.post-tags {
+  display: flex;
+  gap: 6px;
+}
+
+.post-tag {
+  padding: 2px 10px;
+  background: rgba(212, 168, 83, 0.1);
+  border: 1px solid rgba(212, 168, 83, 0.2);
+  border-radius: 999px;
+  font-size: 11px;
+  color: var(--accent-gold);
+  font-weight: 500;
+}
+
+/* ---------- 分隔线 ---------- */
+.glass-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  margin: 32px 0;
+}
+
+/* ---------- 自定义滚动条 ---------- */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ============================================
+   Fumadocs UI 覆盖 — Apple Glass 风格
+   ============================================ */
+
+/* 侧边栏 */
+.fd-sidebar {
+  background: rgba(20, 20, 30, 0.6) !important;
+  backdrop-filter: blur(30px) !important;
+  -webkit-backdrop-filter: blur(30px) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+/* 导航栏 */
+.fd-nav {
+  background: rgba(0, 0, 0, 0.7) !important;
+  backdrop-filter: blur(30px) !important;
+  -webkit-backdrop-filter: blur(30px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+/* 搜索框 */
+.fd-search-bar {
+  background: rgba(20, 20, 30, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 10px !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+/* 代码块 */
+.fd-code-block {
+  background: rgba(10, 10, 15, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-radius: 12px !important;
+}
+
+/* 链接 — 金色 */
+.fd-content a {
+  color: var(--accent-gold) !important;
+  transition: color 0.3s ease;
+}
+
+.fd-content a:hover {
+  color: var(--accent-gold-light) !important;
+  text-shadow: 0 0 12px var(--glow-gold);
+}
+
+/* 标题 */
+.fd-content h1,
+.fd-content h2,
+.fd-content h3 {
+  color: var(--text-primary);
+}
+
+/* 页面主体 */
+.fd-page {
+  background: transparent !important;
 }

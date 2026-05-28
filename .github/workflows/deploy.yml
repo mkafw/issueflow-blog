@@ -29,12 +29,6 @@ jobs:
       - name: Test
         run: npm test
 
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-output
-          path: out/
-
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -57,19 +51,13 @@ jobs:
         run: npm run build
 
       - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v3
+        uses: netlify/actions/cli@master
         with:
-          publish-dir: './out'
-          production-branch: master
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          deploy-message: "Deploy from GitHub Actions"
-          enable-pull-request-comment: true
-          enable-commit-comment: true
-          overwrites-pull-request-comment: true
+          args: deploy --dir=.next --functions=netlify/functions --prod
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        timeout-minutes: 10
+          NETLIFY_CLI_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
 
       - name: Notify Feishu (Success)
         if: success()
@@ -112,7 +100,8 @@ jobs:
                           "tag": "plain_text",
                           "content": "查看提交"
                         },
-                        "url": "https://github.com/mkafw/issueflow-blog/commit/${{ github.sha }}"
+                        "url": "https://github.com/mkafw/issueflow-blog/commit/${{ github.sha }}",
+                        "type": "default"
                       }
                     ]
                   }
